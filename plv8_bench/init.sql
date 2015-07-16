@@ -1,13 +1,23 @@
 --db:pgbench
 --{{{
---CREATE EXTENSION plv8;
-CREATE OR REPLACE FUNCTION plv8_test(keys text[], vals text[]) RETURNS text AS $$
-var o = {};
-for(var i=0; i<keys.length; i++){
-  o[keys[i]] = vals[i];
-}
-return JSON.stringify(o);
+CREATE EXTENSION plv8;
+
+-- noop
+CREATE OR REPLACE FUNCTION v8_noop(x text) RETURNS text AS $$
+return x
 $$ LANGUAGE plv8 IMMUTABLE STRICT;
+
+CREATE OR REPLACE FUNCTION pl_noop(x text) RETURNS text AS $$
+begin
+  return x;
+end
+$$ LANGUAGE plpgsql IMMUTABLE STRICT;
+
+CREATE OR REPLACE FUNCTION sql_noop(x text) RETURNS text AS $$
+select x
+$$ LANGUAGE sql IMMUTABLE STRICT;
+
+-- add
 
 CREATE OR REPLACE FUNCTION sql_add(x bigint, y bigint ) RETURNS bigint AS $$
  select x + y
@@ -23,6 +33,8 @@ begin
 end
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
 
+-- get key
+
 CREATE OR REPLACE FUNCTION v8_get(x json, y text ) RETURNS text AS $$
  return x[y]
 $$ LANGUAGE plv8 IMMUTABLE STRICT;
@@ -32,6 +44,8 @@ begin
  return x->>y;
 end
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
+
+-- iterate
 
 CREATE OR REPLACE FUNCTION v8_iter(x text[], match text) RETURNS bigint AS $$
  var count = 0;
@@ -59,6 +73,8 @@ begin
 end
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
 
+-- execute
+
 drop table if exists users;
 create table users (id serial, label text);
 insert into users (label) values ('a'),('b'),('c');
@@ -79,12 +95,14 @@ begin
 end
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
 
+-- polynomial alg
+
 CREATE OR REPLACE FUNCTION v8_poly(x bigint) RETURNS numeric AS $$
  var n = 5000
  var mu = 10.0
  var pu = 0.0
  var su = 0.0;
- var pol =[]
+ var pol =[];
 
  for(var i=0; i< n; i++){
    for(var j=0; j< 100; j++){
@@ -98,6 +116,7 @@ CREATE OR REPLACE FUNCTION v8_poly(x bigint) RETURNS numeric AS $$
  }
  return pu
 $$ LANGUAGE plv8 IMMUTABLE STRICT;
+
 
 CREATE OR REPLACE FUNCTION pl_poly(x bigint) RETURNS numeric AS $$
 declare
@@ -127,9 +146,9 @@ end
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
 select v8_poly(10);
 select pl_poly(10);
---}}}
 
---{{{
+-- string ops
+
 CREATE OR REPLACE FUNCTION v8_str(inp text) RETURNS text AS $$
   return inp.split("\n").map(function(x){
     if(x){
@@ -159,8 +178,4 @@ begin
   return res;
 end
 $$ LANGUAGE plpgsql IMMUTABLE STRICT;
-
-select pl_str(E'a b\nc d\n');
-select v8_str(E'a b\nc d\n');
-
 --}}}

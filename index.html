@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>reveal.js - The HTML Presentation Framework</title>
+<title>pgday</title>
 
 <meta name="description" content="Presentation about javascript & postgres">
 <meta name="author" content="Nikolay Ryzhikov">
@@ -19,6 +19,7 @@
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="lib/css/zenburn.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!-- Printing and PDF exports -->
 <script>
@@ -33,6 +34,16 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <style>
 .reveal pre code {
   background: black;
+  padding: 10px;
+}
+.reveal section img {
+  border: none;
+  box-shadow: none;
+}
+.slidernav img{
+  width: 80px;
+  display: inline-block;
+  margin: 10px;
 }
 </style>
 </head>
@@ -42,7 +53,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <div class="reveal">
   <div class="slides">
     <section>
-      <h3>JavaScript <br/> inside  <br/>PostgreSQL</h3>
+      <h3>PostgreSQL</br>
+        as app platform</h3>
       <h3></h3>
       <p>
       <small>Created by <a href="http://github.com/niquola">niquola</a> / <a href="http://twitter.com/niquola">@niquola</a></small>
@@ -50,13 +62,124 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
     </section>
 
     <section>
+      <blockquote>
+        PostgreSQL is Operation System
+        <br/>
+        for data
+      </blockquote>
+      <br/>
+      <p><b>Simon Riggs</b></p>
+    </section>
+
+    <section>
+      <h3>App Platform?</h3>
+      <img src="platform.jpg" style="height: 500px"/>
+    </section>
+
+    <section>
       <h5> JavaScript inside PostgreSQL</h5>
       <img src="pg-and-js.jpg"/>
     </section>
 
+    <section style="top: 0px; display: block;" class="present">
+    <h5>
+    Nikolay Ryzhikov
+    </h5>
+    <img src="niquola.jpg" style="border:none; height: 500px; box-shado: none; background: transparent;">
+    <p>
+      <a href="http://github.com/niquola">
+      <i class="fa fa-github"></i>
+      </a>
+      <a href="http://twitter.com/niquola">
+      <i class="fa fa-twitter"></i>
+      </a>
+      <a href="https://plus.google.com/u/0/+%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B9%D0%A0%D1%8B%D0%B6%D0%B8%D0%BA%D0%BE%D0%B2">
+      <i class="fa fa-google-plus"></i>
+      </a>
+      <a href="https://www.facebook.com/nicola.ryzhikov">
+      <i class="fa fa-facebook"></i>
+      </a>
+    </p>
+    </section>
+
+    <section style="top: 0px; display: block;" class="present">
+      <h5>HealthSamurai</h5>
+      <img src="hs.png" style="height: 200px;"/>
+      <div class="slidernav">
+      <img class="image _image image-3 js-fhirbase" src="choice.svg">
+      <img class="image image-5 js-foodtaster" src="foodtaster.svg">
+      <img class="image _image image-4 js-fotmstamp" src="stamp.svg">
+      <img class="image _image image-2 js-choice-btn" src="fhirebase.svg">
+      <img class="image image-5 js-foodtaster" src="aidbox-logo.png">
+      </div>
+    </section>
+
     <section>
-      <h3>FHIR: Fast Healthcare Interoperability Resources</h3>
-      <img src="fhir.png"/>
+      <img src="chs.png" style="float:right;"/>
+      <h5 style="text-align:left;">MedClient EHR</h5>
+      <img src="medclient.png"/>
+    </section>
+
+    <section>
+      <h5>MedClient</h5>
+      <ul>
+        <li>Monolith + 10 services</li>
+        <li>~0.5M ruby SLOC + jvm, js etc</li>
+        <li>Auto install on AWS (chef/sensu/etc)</li>
+        <li>5 databases ~ 1000 tables</li>
+        <li>no heigh load (100 sessions)</li>
+        <li>no big data (0.5T)</li>
+        <li><b>structural complexity</b></li>
+      </ul>
+    </section>
+
+    <section>
+      <img src="onc.png"/>
+      <img src="hl7.gif"/>
+    </section>
+
+    <section>
+      <h3>Domain Complexity</h3>
+      <img src="rim.png"/>
+    </section>
+
+    <section>
+      <h3>We need standard!</h3>
+      <h3>Which?</h3>
+      <ul>
+        <li>HL7 v2</li>
+        <li>HL7 v3</li>
+        <li>OpenEHR</li>
+        <li><b>FHIR</b></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>MGrid</h3>
+      <p>Database for HL7 v3 RIM (Postgres)</p>
+      <img src="rim2.png"/>
+    </section>
+
+    <section>
+      <h3>FHIR</h3>
+      <img src="fhirf.png"/>
+      <p>Fast Healthcare Interoperability Resources</p>
+    </section>
+
+    <section>
+      <h3>FHIR: ~100 Resources</h3>
+      <img src="res-map.png"/>
+    </section>
+
+    <section>
+      <h3>FHIR: REST API</h3>
+      <ul>
+        <li>CRUD</li>
+        <li>History</li>
+        <li>Search</li>
+        <li>Terminology</li>
+        <li>...</li>
+      </ul>
     </section>
 
     <section>
@@ -67,40 +190,51 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
     <section>
       <img src="fhirbase.png"/>
-      <h3>fhirbase</h3>
-      <pre><code class="sql">
-       SELECT fhir.create( $JSON$
-         {
-          resourceType: "Patient",
-          name: "Ivan",
-          birthDate: "1981-01-02"
-         }
-       $JSON$);
-
-       SELECT fhir.search('Patient', 'name=ivan&birthdate=>1970');
-      </code></pre>
+      <h3><a href="http://fhirbase.github.io/demo/index.html#/">fhirbase</a></h3>
+      <p>
+      Relational Storage<br/>
+      for FHIR resources
+      </p>
     </section>
 
     <section>
-      <h3>It works!</h3>
+      <h3>fhirbase</h3>
+<pre><code class="sql">SELECT fhir.create($JSON$
+ {
+  resourceType: "Patient",
+  name: [{text: "Ivan"}],
+  birthDate: "1981-01-02"
+ }
+$JSON$);
+
+SELECT fhir.search('Patient', 'name=ivan&birthdate=>1970');
+</code></pre>
+    </section>
+
+    <section>
+      <h3>works!?</h3>
       <hr/>
       <ul>
         <li>fhirface, Aidbox - clojure</li>
         <li>Netrika (SPb) - .NET</li>
         <li>Kainos (UK) - Java</li>
+        <li>...</li>
       </ul>
     </section>
 
     <section>
-      <h3>But, programmer UX is :(</h3>
+      <h3>But, programmers UX is :(</h3>
+      <img src="ux.jpg"/>
+    </section>
+
+    <section>
+      <h3>UX & tooling</h3>
       <ul>
         <li>own preprocessor</li>
         <li>own modules</li>
         <li>SQL & PL/PGSQL not expressive</li>
         <li>own test framework</li>
       </ul>
-      <br/>
-      <img src="ux.jpg"/>
     </section>
 
     <section>
@@ -115,7 +249,7 @@ CREATE OR REPLACE FUNCTION
 module._build_url(_cfg_ jsonb, VARIADIC path text[]) RETURNS text
 AS $$
   SELECT _cfg_->>'base' || '/' || (SELECT string_agg(x, '/')
-  FROM unnest(path) x)
+    FROM unnest(path) x)
 $$ language SQL immutable;
     </code></pre>
     </section>
@@ -136,8 +270,27 @@ func _build_url(_cfg_ jsonb, VARIADIC path text[]) RETURNS text
     </section>
 
     <section>
-      <h3>SQL PG/PLSQL</h3>
-      <pre style="height: 200%"><code class="sql" style="width: 160%; margin-left: -30%;">func _expand_search_params(_resource_type text, _query text) RETURNS setof query_param
+      <h3>Tests</h3>
+      <pre><code class="sql">
+BEGIN;
+_extract_id('rid/_history/vid') => 'rid'
+-- SELECT expect(_extract_id('rid/_history/vid'),'rid')
+
+SELECT fhirbase_generate.generate_tables('{Patient}');
+
+setv('createOutcome',
+  fhirbase_crud.create('{}'::jsonb, :'pt_json')
+);
+
+getv('createOutcome')->>'resourceType' => 'OperationOutcome'
+getv('createOutcome')#>>'{issue,0,code,coding,1,code}' => '400'
+
+ROLLBACK;
+      </code></pre>
+    </section>
+
+    <section>
+      <pre style="font-size: 9px; height: 100%;"><code class="sql">func _expand_search_params(_resource_type text, _query text) RETURNS setof query_param
   WITH RECURSIVE params(parent_resource, link_path, res, chain, key, operator, value) AS (
     SELECT null::text as parent_resource, -- we start with empty parent resoure
            '{}'::text[] as link_path, -- path of reference attribute to join
@@ -186,32 +339,13 @@ func _build_url(_cfg_ jsonb, VARIADIC path text[]) RETURNS text
     </section>
 
     <section>
-      <h3>Tests</h3>
-      <pre><code class="sql">
-BEGIN;
-_extract_id('rid/_history/vid') => 'rid'
--- SELECT expect(_extract_id('rid/_history/vid'),'rid')
-
-SELECT fhirbase_generate.generate_tables('{Patient}');
-
-setv('createOutcome',
-  fhirbase_crud.create('{}'::jsonb, :'pt_json')
-);
-
-getv('createOutcome')->>'resourceType' => 'OperationOutcome'
-getv('createOutcome')#>>'{issue,0,code,coding,1,code}' => '400'
-
-ROLLBACK;
-      </code></pre>
-    </section>
-
-    <section>
       <h3>Logic in DB</h3>
       <img src="bajan.jpg"/>
     </section>
 
     <section>
       <h3>Logic in DB: PRO</h3>
+      <hr/>
       <ul>
         <li>Performance (faster transactions, data locality)</li>
         <li>Consistency (like incapsulation)</li>
@@ -237,96 +371,31 @@ ROLLBACK;
       <ul>
         <li>+modern language</li>
         <li>+modularity</li>
-        <li>+packages</li>
-        <li>+good practices</li>
+        <li>+tooling</li>
       </ul>
     </section>
 
     <section>
-      <h3>Postgres: OS for data</h3>
-      <hr/>
+      <h3>Which lang?</h3>
+    </section>
+
+    <section>
+      <img src="js.png"/>
+      <br/>
       <ul>
-        <li>extensions (SQL, C, C++)</li>
-        <li>custom types</li>
-        <li>advanced indexes</li>
-        <li>pluggable languages (python, plpgsql)</li>
-        <li>FDW (Foreign Data Wrappers)</li>
+        <li>everywhere (interop)</li>
+        <li>everyone knows</li>
+        <li>faster</li>
       </ul>
     </section>
 
     <section>
-      <h3>pg: extensions</h3>
-      <pre><code class="sql">
-  -- PostGIS: a spatial database extender
-  SELECT superhero.name
-  FROM city, superhero
-  WHERE ST_Contains(city.geom, superhero.geom)
-  AND city.name = 'Gotham';
-      </code></pre>
-      <br/>
-      <a href="http://pgxn.org/">http://pgxn.org/</a>
-    </section>
-
-    <section>
-      <h3>pg: custom types</h3>
-      <pre><code class="sql">
-  CREATE TYPE address AS (city text, street text);
-
-  typedef struct Complex {
-      double      x;
-      double      y;
-  } Complex;
-
-  CREATE FUNCTION complex_in(cstring)
-  RETURNS complex AS 'filename'
-  LANGUAGE C IMMUTABLE STRICT;
-      </code></pre>
-    </section>
-
-    <section>
-      <h3>pg: indexes</h3>
-      <pre><code class="sql">
--- GIN Index
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-CREATE INDEX users_search_idx ON users
-USING gin (first_name gin_trgm_ops, last_name gin_trgm_ops);
-
-SELECT count(*) FROM users where first_name ilike '%aeb%';
-      </code></pre>
-      <br/>
-    </section>
-
-    <section>
-      <h3>pg: languages</h3>
-      <pre><code class="sql">
-CREATE LANGUAGE plpython;
-CREATE FUNCTION pymax (a integer, b integer)
-  RETURNS integer
-AS $$
-  if a > b:
-    return a
-  return b
-$$ LANGUAGE plpythonu;
-      </code></pre>
-      <br/>
-    </section>
-
-    <section>
-      <h3>pg: FDW</h3>
-      <pre><code class="sql">
-CREATE EXTENSION file_fdw;
-CREATE SERVER data FOREIGN DATA WRAPPER file_fdw;
-CREATE FOREIGN TABLE pglog (
-  name text,
-  address tetx
-) SERVER data
-OPTIONS ( filename '/users.csv', format 'csv' );
-      </code></pre>
-      <br/>
-    </section>
-
-    <section>
-      <h3>What is a most popular lang now?</h3>
+      <ul>
+        <li><a href="http://www.youtube.com/watch?v=gz7KL7ZirZc">most misunderstood language</a>
+        <li><a href="https://skillsmatter.com/skillscasts/2323-bobs-last-language">last programming language</a>
+        <li><a href="http://githut.info/">githut</a></li>
+        <li><a href="http://www.sitepoint.com/whats-best-programming-language-learn-2015/">2015</a></li>
+      </ul>
     </section>
 
     <section>
@@ -346,12 +415,12 @@ OPTIONS ( filename '/users.csv', format 'csv' );
       <h3>plv8: functions</h3>
       <pre><code class="sql">
   CREATE FUNCTION plv8_test(keys text[], vals text[])
-  RETURNS text AS $$
-    var o = {};
+  RETURNS json AS $$
+    var obj = {};
     for(var i=0; i&lt;keys.length; i++){
-        o[keys[i]] = vals[i];
+        obj[keys[i]] = vals[i];
     }
-    return JSON.stringify(o);
+    return obj;
   $$ LANGUAGE plv8 IMMUTABLE STRICT;
 
   SELECT plv8_test(ARRAY['name', 'age'], ARRAY['Tom', '29']);
@@ -364,8 +433,7 @@ OPTIONS ( filename '/users.csv', format 'csv' );
 
     <section>
       <h3>plv8: returning function calls</h3>
-      <pre><code class="sql">
-CREATE TYPE rec AS (i integer, t text);
+      <pre><code class="sql">CREATE TYPE rec AS (i integer, t text);
 CREATE FUNCTION set_of_records() RETURNS SETOF rec AS
 $$
     // plv8.return_next() stores records in an internal tuplestore,
@@ -385,23 +453,22 @@ SELECT * FROM set_of_records();
 
     <section>
       <h3>plv8: triggers</h3>
-      <pre><code class="sql">
-CREATE FUNCTION test_trigger() RETURNS trigger AS
+      <pre><code class="sql">CREATE FUNCTION test_trigger() RETURNS trigger AS
 $$
-    plv8.elog(NOTICE, "NEW = ", JSON.stringify(NEW));
-    plv8.elog(NOTICE, "OLD = ", JSON.stringify(OLD));
-    plv8.elog(NOTICE, "TG_OP = ", TG_OP);
-    plv8.elog(NOTICE, "TG_ARGV = ", TG_ARGV);
-    if (TG_OP == "UPDATE") {
+    plv8.elog(NOTICE, JSON.stringify(NEW));
+    plv8.elog(NOTICE, JSON.stringify(OLD));
+    plv8.elog(NOTICE, TG_OP);
+    plv8.elog(NOTICE, TG_ARGV);
+    if (TG_OP == UPDATE) {
         NEW.i = 102;
         return NEW;
     }
-$$ LANGUAGE "plv8";
+$$ LANGUAGE plv8;
 
 CREATE TRIGGER test_trigger
-    BEFORE INSERT OR UPDATE OR DELETE
-    ON test_tbl FOR EACH ROW
-    EXECUTE PROCEDURE test_trigger('foo', 'bar');
+BEFORE INSERT OR UPDATE OR DELETE
+ON test_tbl FOR EACH ROW
+EXECUTE PROCEDURE test_trigger('foo', 'bar');
       </code></pre>
       <br/>
     </section>
@@ -426,6 +493,88 @@ CREATE TRIGGER test_trigger
     </section>
 
     <section>
+      <h3>plv8: bench</h3>
+      <hr/>
+      <table>
+        <tr>
+          <th>alg</th>
+          <th>sql</th>
+          <th>v8</th>
+          <th>pgsql</th>
+        </tr>
+        <tr>
+          <td>noop</td>
+          <td>1</td>
+          <td>3.9</td>
+          <td>5.0</td>
+        </tr>
+        <tr>
+          <td>add</td>
+          <td>1</td>
+          <td>3.1</td>
+          <td>4.8</td>
+        </tr>
+        <tr>
+          <td>str</td>
+          <td>~</td>
+          <td>1</td>
+          <td>1.8</td>
+        </tr>
+        <tr>
+          <td>get key</td>
+          <td>1</td>
+          <td>4.4</td>
+          <td>2.8</td>
+        </tr>
+        <tr>
+          <td>iter</td>
+          <td>~</td>
+          <td>1</td>
+          <td>1.2</td>
+        </tr>
+        <tr>
+          <td>exec</td>
+          <td>~</td>
+          <td>1.2</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>polynom</td>
+          <td>~</td>
+          <td>1</td>
+          <td>200</td>
+        </tr>
+      </table>
+
+      <a href="https://github.com/niquola/pgday-spb-2015-slides/blob/master/plv8_bench/init.sql">improve</a>
+    </section>
+
+    <section>
+      <h3>Not one language</h3>
+      <ul>
+        <li>CoffeeScript</li>
+        <li>TypeScript</li>
+        <li>ClojureScript</li>
+        <li>PureScript</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>We need more</h3>
+      <hr/>
+      <ul>
+        <li>+ modularity</li>
+        <li>+ tooling</li>
+      </ul>
+    </section>
+
+    <section>
+      <img src="node.png"/>
+      <p>Event-driven I/O server-side <br/>
+      JavaScript environment based on V8</p>
+    </section>
+
+    <section>
       <h3>PG + PLV8 + NODEJS?</h3>
       <hr/>
       <img src="happy.jpg"/>
@@ -442,29 +591,27 @@ CREATE TRIGGER test_trigger
 
     <section>
       <h3>pg.js: mock plv8</h3>
-<pre><code class="js">
-var Client = require('pg-native')
+<pre><code class="coffee">Client = require('pg-native')
+client = new Client
+client.connectSync(conn_string)
 
-var client = new Client()
-client.connectSync('postgres://root:root@localhost:5432/test');
-
-module.exports = {
-  execute: function(){
-    return client.querySync.apply(client,arguments)
-  },
-  elog: function(x, msg){
-    console.log(msg)
-  }
-}
-..
+global.INFO="INFO"
+module.exports =
+  execute: = ->
+    client.querySync.apply(client, arguments).map(coerse)
+  elog: (x, msg) ->
+    console.log "#{x}:", msg
+  quote_literal: (str)->
+    str && client.pq.escapeLiteral(str)
+  quote_ident: (str)->
+    str && client.pq.escapeIdentifier(str)
 </code></pre>
 
     </section>
 
     <section>
       <h3>pg.js: write in node</h3>
-<pre><code class="coffee">
-util = require('./util')
+<pre><code class="coffee">util = require('./util')
 uuid = (plv8)->
   plv8.execute('select gen_random_uuid() as uuid')[0].uuid
 
@@ -473,11 +620,11 @@ create = (plv8, resource)->
   table_name = util.table_name(resource_type)
   # ...
   json  = JSON.stringify(resource)
-  res = plv8.execute """
+  plv8.execute """
     INSERT INTO #{table_name}
-    (logical_id, version_id, content)
+    (id, version_id, content)
     VALUES ($1,$2,$3)
-    """, [logical_id, version_id, json]
+    """, [id, version_id, json]
   resource
 </code></pre>
     </section>
@@ -548,12 +695,22 @@ select fhir.read('StructureDefinition', 'Patient') as read
     </section>
 
     <section>
+      <h3>Experiments on github</h3>
+      <ul>
+        <li><a href="https://github.com/niquola/pgpp">pgpp</a></li>
+        <li><a href="https://github.com/niquola/plpl">plpl</a></li>
+        <li><a href="https://github.com/niquola/plpl-sample">plpl-sampl</a></li>
+      </ul>
+    </section>
+
+    <section>
       <h3>pg.js: Road Map</h3>
       <hr/>
       <ul>
-        <li>Remove death code (Google closure)</li>
-        <li>Implement most of plv8</li>
-        <li>Make it npm package</li>
+        <li>remove death code (Google closure comp)</li>
+        <li>extend plv8 - require, native fn call,....</li>
+        <li>deploy</li>
+        <li>apply to fhirbase</li>
       </ul>
     </section>
 
