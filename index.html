@@ -232,8 +232,8 @@ SELECT fhir.search('Patient', 'name=ivan&birthdate=>1970');
       <ul>
         <li>own preprocessor</li>
         <li>own modules</li>
-        <li>SQL & PL/PGSQL not expressive</li>
         <li>own test framework</li>
+        <li>own migrations</li>
       </ul>
     </section>
 
@@ -287,6 +287,11 @@ getv('createOutcome')#>>'{issue,0,code,coding,1,code}' => '400'
 
 ROLLBACK;
       </code></pre>
+    </section>
+
+    <section>
+      <h3>threshold</h3>
+      <img src="steps.jpg"/>
     </section>
 
     <section>
@@ -344,7 +349,7 @@ ROLLBACK;
     </section>
 
     <section>
-      <h3>Logic in DB: PRO</h3>
+      <h3>Logic in DB (Smart Storage): PRO</h3>
       <hr/>
       <ul>
         <li>Performance (faster transactions, data locality)</li>
@@ -385,7 +390,7 @@ ROLLBACK;
       <ul>
         <li>everywhere (interop)</li>
         <li>everyone knows</li>
-        <li>faster</li>
+        <li>fast</li>
       </ul>
     </section>
 
@@ -556,7 +561,27 @@ EXECUTE PROCEDURE test_trigger('foo', 'bar');
         <li>TypeScript</li>
         <li>ClojureScript</li>
         <li>PureScript</li>
+        <li>pgsql :)</li>
+        <li>your?</li>
       </ul>
+    </section>
+
+    <section>
+      <h3>jsx -> jsql</h3>
+<pre><code class="javascript">
+var HelloMessage = React.createClass({
+  render: function() {
+    return <div>Hello {this.props.name}</div>;
+  }
+});
+// why not
+var x = 5;
+(SELECT .* FROM users where id = x)
+.map(function(u){
+   return u.name;
+})
+</code></pre>
+
     </section>
 
     <section>
